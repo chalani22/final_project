@@ -12,41 +12,33 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'NIC Decoder',
       theme: ThemeData(
-        primarySwatch: Colors.teal, // Fix: Use a MaterialColor
+        primarySwatch: Colors.blue,
         brightness: Brightness.light,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(
+              fontSize: 18, color: Colors.black), // Updated to bodyLarge
+          bodyMedium: TextStyle(
+              fontSize: 16, color: Colors.black87), // Updated to bodyMedium
+        ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
-          fillColor: Color.fromARGB(255, 98, 220, 208), // No issue here
+          fillColor: Colors.blue[50],
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
           ),
-          labelStyle: TextStyle(
-            color: Color.fromARGB(255, 98, 220, 208),
-          ),
-          hintStyle: TextStyle(
-            color: Color.fromARGB(255, 98, 220, 208),
-          ),
-        ),
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
-            backgroundColor: Color.fromARGB(255, 98, 220, 208),
-            foregroundColor: Colors.white,
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
+          labelStyle: TextStyle(color: Colors.blue[700]),
+          hintStyle: TextStyle(color: Colors.blue[500]),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color.fromARGB(255, 98, 220, 208),
+            backgroundColor: Colors.blueAccent,
             foregroundColor: Colors.white,
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
           ),
         ),
       ),

@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:final_project/result_screen.dart';
+import 'result_screen.dart';
+import 'nic_controller.dart';
 
 class InputScreen extends StatelessWidget {
   final TextEditingController nicController = TextEditingController();
+  final NICController nicControllerInstance = Get.put(NICController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('NIC Decoder'),
-        backgroundColor: Color.fromARGB(255, 98, 220, 208), // Teal app bar
+        backgroundColor: Colors.blueAccent,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 20),
             Text(
               'Enter NIC Number',
               style: TextStyle(
                 fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 0, 105, 98), // Dark teal text
+                fontWeight: FontWeight.w600,
+                color: Colors.blue[700],
               ),
             ),
             SizedBox(height: 20),
@@ -33,24 +34,18 @@ class InputScreen extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: 'NIC Number',
                 hintText: 'Enter NIC number here',
-                prefixIcon: Icon(Icons.credit_card,
-                    color: Color.fromARGB(255, 98, 220, 208)), // Teal icon
-                filled: true,
-                fillColor:
-                    Color.fromARGB(50, 98, 220, 208), // Light teal background
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
-                ),
+                prefixIcon: Icon(Icons.credit_card, color: Colors.blueAccent),
               ),
               keyboardType: TextInputType.number,
+              style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 String nic = nicController.text.trim();
                 if (nic.isNotEmpty) {
-                  // Decode NIC and navigate to Result Screen
+                  nicControllerInstance.nicNumber.value = nic;
+                  nicControllerInstance.decodeNIC();
                   Get.to(() => ResultScreen(nic: nic));
                 } else {
                   Get.snackbar(
@@ -61,15 +56,6 @@ class InputScreen extends StatelessWidget {
                   );
                 }
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    Color.fromARGB(255, 98, 220, 208), // Teal button
-                foregroundColor: Colors.white, // White text
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
               child: Text('Decode'),
             ),
           ],
